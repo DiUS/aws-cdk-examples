@@ -1,7 +1,7 @@
-import ec2 = require('@aws-cdk/aws-ec2');
-import ecs = require('@aws-cdk/aws-ecs');
-import ecs_patterns = require('@aws-cdk/aws-ecs-patterns');
-import cdk = require('@aws-cdk/core');
+import * as ec2 from "aws-cdk-lib/aws-ec2";
+import * as ecs from "aws-cdk-lib/aws-ecs";
+import * as ecs_patterns from "aws-cdk-lib/aws-ecs-patterns";
+import * as cdk from "aws-cdk-lib";
 
 class BonjourFargate extends cdk.Stack {
   constructor(scope: cdk.App, id: string, props?: cdk.StackProps) {
