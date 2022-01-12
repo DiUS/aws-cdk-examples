@@ -13,15 +13,8 @@
         "prettier": "prettier --write '**/{bin,lib,src,tst}/*.ts'"
     },
     "devDependencies": {
-        "aws-cdk": "*",
-        "@aws-cdk/core": "*",
-        "@aws-cdk/assert": "*",
-        "@aws-cdk/aws-apigateway": "*",
-        "@aws-cdk/aws-codebuild": "*",
-        "@aws-cdk/aws-codecommit": "*",
-        "@aws-cdk/aws-codepipeline": "*",
-        "@aws-cdk/aws-codepipeline-actions": "*",
-        "@aws-cdk/aws-cloudformation": "*",
+        "aws-cdk-lib": "^2.0.0",
+        "constructs": "^10.0.0",
         "@types/node": "^13.7.0",
         "ts-node": "^8.1.0",
         "typescript": "^3.8.3",
