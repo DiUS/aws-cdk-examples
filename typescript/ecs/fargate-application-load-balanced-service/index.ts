@@ -13,12 +13,15 @@ class BonjourFargate extends cdk.Stack {
     const cluster = new ecs.Cluster(this, 'Cluster', { vpc });
 
     // Instantiate Fargate Service with just cluster and image
-    new ecs_patterns.ApplicationLoadBalancedFargateService(this, "FargateService", {
+    const fargateService = new ecs_patterns.ApplicationLoadBalancedFargateService(this, "FargateService", {
       cluster,
       taskImageOptions: {
-        image: ecs.ContainerImage.fromRegistry("amazon/amazon-ecs-sample"),
+        image: ecs.ContainerImage.fromRegistry("nginx:1.21"),
       },
     });
+
+    // Setup AutoScaling policy
+    fargateService.service.autoScaleTaskCount({ minCapacity: 1, maxCapacity: 2 });
   }
 }
 
