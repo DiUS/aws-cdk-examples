@@ -1,0 +1,373 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`CDKExampleLambdaApiStack matches the snapshot 1`] = `
+Object {
+  "Outputs": Object {
+    "CDKExampleLambdaApiStackRestApiEndpoint1149BC51": Object {
+      "Value": Object {
+        "Fn::Join": Array [
+          "",
+          Array [
+            "https://",
+            Object {
+              "Ref": "CDKExampleLambdaApiStackRestApiCAC93DD8",
+            },
+            ".execute-api.",
+            Object {
+              "Ref": "AWS::Region",
+            },
+            ".",
+            Object {
+              "Ref": "AWS::URLSuffix",
+            },
+            "/",
+            Object {
+              "Ref": "CDKExampleLambdaApiStackRestApiDeploymentStagebeta8138CF71",
+            },
+            "/",
+          ],
+        ],
+      },
+    },
+  },
+  "Parameters": Object {
+    "BootstrapVersion": Object {
+      "Default": "/cdk-bootstrap/hnb659fds/version",
+      "Description": "Version of the CDK Bootstrap resources in this environment, automatically retrieved from SSM Parameter Store. [cdk:skip]",
+      "Type": "AWS::SSM::Parameter::Value<String>",
+    },
+  },
+  "Resources": Object {
+    "CDKExampleLambdaApiStackRestApiAccount3EE532F2": Object {
+      "DependsOn": Array [
+        "CDKExampleLambdaApiStackRestApiCAC93DD8",
+      ],
+      "Properties": Object {
+        "CloudWatchRoleArn": Object {
+          "Fn::GetAtt": Array [
+            "CDKExampleLambdaApiStackRestApiCloudWatchRole9669CD14",
+            "Arn",
+          ],
+        },
+      },
+      "Type": "AWS::ApiGateway::Account",
+    },
+    "CDKExampleLambdaApiStackRestApiCAC93DD8": Object {
+      "Properties": Object {
+        "Name": "CDKExampleLambdaApiStackRestApi",
+      },
+      "Type": "AWS::ApiGateway::RestApi",
+    },
+    "CDKExampleLambdaApiStackRestApiCloudWatchRole9669CD14": Object {
+      "Properties": Object {
+        "AssumeRolePolicyDocument": Object {
+          "Statement": Array [
+            Object {
+              "Action": "sts:AssumeRole",
+              "Effect": "Allow",
+              "Principal": Object {
+                "Service": "apigateway.amazonaws.com",
+              },
+            },
+          ],
+          "Version": "2012-10-17",
+        },
+        "ManagedPolicyArns": Array [
+          Object {
+            "Fn::Join": Array [
+              "",
+              Array [
+                "arn:",
+                Object {
+                  "Ref": "AWS::Partition",
+                },
+                ":iam::aws:policy/service-role/AmazonAPIGatewayPushToCloudWatchLogs",
+              ],
+            ],
+          },
+        ],
+      },
+      "Type": "AWS::IAM::Role",
+    },
+    "CDKExampleLambdaApiStackRestApiDeployment37B17BF870145ddf8c8b20a377df7276aa39871a": Object {
+      "DependsOn": Array [
+        "CDKExampleLambdaApiStackRestApiGET1D1BF51F",
+      ],
+      "Properties": Object {
+        "Description": "Automatically created by the RestApi construct",
+        "RestApiId": Object {
+          "Ref": "CDKExampleLambdaApiStackRestApiCAC93DD8",
+        },
+      },
+      "Type": "AWS::ApiGateway::Deployment",
+    },
+    "CDKExampleLambdaApiStackRestApiDeploymentStagebeta8138CF71": Object {
+      "DependsOn": Array [
+        "CDKExampleLambdaApiStackRestApiAccount3EE532F2",
+      ],
+      "Properties": Object {
+        "DeploymentId": Object {
+          "Ref": "CDKExampleLambdaApiStackRestApiDeployment37B17BF870145ddf8c8b20a377df7276aa39871a",
+        },
+        "MethodSettings": Array [
+          Object {
+            "DataTraceEnabled": true,
+            "HttpMethod": "*",
+            "LoggingLevel": "INFO",
+            "MetricsEnabled": true,
+            "ResourcePath": "/*",
+          },
+        ],
+        "RestApiId": Object {
+          "Ref": "CDKExampleLambdaApiStackRestApiCAC93DD8",
+        },
+        "StageName": "beta",
+      },
+      "Type": "AWS::ApiGateway::Stage",
+    },
+    "CDKExampleLambdaApiStackRestApiGET1D1BF51F": Object {
+      "Properties": Object {
+        "AuthorizationType": "NONE",
+        "HttpMethod": "GET",
+        "Integration": Object {
+          "IntegrationHttpMethod": "POST",
+          "Type": "AWS_PROXY",
+          "Uri": Object {
+            "Fn::Join": Array [
+              "",
+              Array [
+                "arn:",
+                Object {
+                  "Ref": "AWS::Partition",
+                },
+                ":apigateway:",
+                Object {
+                  "Ref": "AWS::Region",
+                },
+                ":lambda:path/2015-03-31/functions/",
+                Object {
+                  "Fn::GetAtt": Array [
+                    "CDKExampleWidgetStoreFunctionA4940D6D",
+                    "Arn",
+                  ],
+                },
+                "/invocations",
+              ],
+            ],
+          },
+        },
+        "ResourceId": Object {
+          "Fn::GetAtt": Array [
+            "CDKExampleLambdaApiStackRestApiCAC93DD8",
+            "RootResourceId",
+          ],
+        },
+        "RestApiId": Object {
+          "Ref": "CDKExampleLambdaApiStackRestApiCAC93DD8",
+        },
+      },
+      "Type": "AWS::ApiGateway::Method",
+    },
+    "CDKExampleLambdaApiStackRestApiGETApiPermissionCDKExampleLambdaApiStackCDKExampleLambdaApiStackRestApiC60CCD8CGETE5CE3D09": Object {
+      "Properties": Object {
+        "Action": "lambda:InvokeFunction",
+        "FunctionName": Object {
+          "Fn::GetAtt": Array [
+            "CDKExampleWidgetStoreFunctionA4940D6D",
+            "Arn",
+          ],
+        },
+        "Principal": "apigateway.amazonaws.com",
+        "SourceArn": Object {
+          "Fn::Join": Array [
+            "",
+            Array [
+              "arn:",
+              Object {
+                "Ref": "AWS::Partition",
+              },
+              ":execute-api:",
+              Object {
+                "Ref": "AWS::Region",
+              },
+              ":",
+              Object {
+                "Ref": "AWS::AccountId",
+              },
+              ":",
+              Object {
+                "Ref": "CDKExampleLambdaApiStackRestApiCAC93DD8",
+              },
+              "/",
+              Object {
+                "Ref": "CDKExampleLambdaApiStackRestApiDeploymentStagebeta8138CF71",
+              },
+              "/GET/",
+            ],
+          ],
+        },
+      },
+      "Type": "AWS::Lambda::Permission",
+    },
+    "CDKExampleLambdaApiStackRestApiGETApiPermissionTestCDKExampleLambdaApiStackCDKExampleLambdaApiStackRestApiC60CCD8CGETA3F9B129": Object {
+      "Properties": Object {
+        "Action": "lambda:InvokeFunction",
+        "FunctionName": Object {
+          "Fn::GetAtt": Array [
+            "CDKExampleWidgetStoreFunctionA4940D6D",
+            "Arn",
+          ],
+        },
+        "Principal": "apigateway.amazonaws.com",
+        "SourceArn": Object {
+          "Fn::Join": Array [
+            "",
+            Array [
+              "arn:",
+              Object {
+                "Ref": "AWS::Partition",
+              },
+              ":execute-api:",
+              Object {
+                "Ref": "AWS::Region",
+              },
+              ":",
+              Object {
+                "Ref": "AWS::AccountId",
+              },
+              ":",
+              Object {
+                "Ref": "CDKExampleLambdaApiStackRestApiCAC93DD8",
+              },
+              "/test-invoke-stage/GET/",
+            ],
+          ],
+        },
+      },
+      "Type": "AWS::Lambda::Permission",
+    },
+    "CDKExampleWidgetStoreFunctionA4940D6D": Object {
+      "DependsOn": Array [
+        "CDKExampleWidgetStoreFunctionServiceRoleDefaultPolicyF99A2276",
+        "CDKExampleWidgetStoreFunctionServiceRole02FC6386",
+      ],
+      "Properties": Object {
+        "Code": Object {
+          "S3Bucket": Object {
+            "Fn::Sub": "cdk-hnb659fds-assets-\${AWS::AccountId}-\${AWS::Region}",
+          },
+          "S3Key": "9fa860a50a8bbf76ce8ec863dd539458874ef7d0a6e8d6c7c0abd317bca3a591.zip",
+        },
+        "Environment": Object {
+          "Variables": Object {
+            "BUCKET": Object {
+              "Ref": "WidgetStoreDA467545",
+            },
+          },
+        },
+        "FunctionName": "CDKExampleWidgetStoreFunction",
+        "Handler": "handler.handler",
+        "MemorySize": 512,
+        "Role": Object {
+          "Fn::GetAtt": Array [
+            "CDKExampleWidgetStoreFunctionServiceRole02FC6386",
+            "Arn",
+          ],
+        },
+        "Runtime": "nodejs14.x",
+        "Timeout": 10,
+      },
+      "Type": "AWS::Lambda::Function",
+    },
+    "CDKExampleWidgetStoreFunctionServiceRole02FC6386": Object {
+      "Properties": Object {
+        "AssumeRolePolicyDocument": Object {
+          "Statement": Array [
+            Object {
+              "Action": "sts:AssumeRole",
+              "Effect": "Allow",
+              "Principal": Object {
+                "Service": "lambda.amazonaws.com",
+              },
+            },
+          ],
+          "Version": "2012-10-17",
+        },
+        "ManagedPolicyArns": Array [
+          Object {
+            "Fn::Join": Array [
+              "",
+              Array [
+                "arn:",
+                Object {
+                  "Ref": "AWS::Partition",
+                },
+                ":iam::aws:policy/service-role/AWSLambdaBasicExecutionRole",
+              ],
+            ],
+          },
+        ],
+      },
+      "Type": "AWS::IAM::Role",
+    },
+    "CDKExampleWidgetStoreFunctionServiceRoleDefaultPolicyF99A2276": Object {
+      "Properties": Object {
+        "PolicyDocument": Object {
+          "Statement": Array [
+            Object {
+              "Action": "s3:ListBucket",
+              "Effect": "Allow",
+              "Resource": Object {
+                "Fn::GetAtt": Array [
+                  "WidgetStoreDA467545",
+                  "Arn",
+                ],
+              },
+            },
+          ],
+          "Version": "2012-10-17",
+        },
+        "PolicyName": "CDKExampleWidgetStoreFunctionServiceRoleDefaultPolicyF99A2276",
+        "Roles": Array [
+          Object {
+            "Ref": "CDKExampleWidgetStoreFunctionServiceRole02FC6386",
+          },
+        ],
+      },
+      "Type": "AWS::IAM::Policy",
+    },
+    "WidgetStoreDA467545": Object {
+      "DeletionPolicy": "Retain",
+      "Type": "AWS::S3::Bucket",
+      "UpdateReplacePolicy": "Retain",
+    },
+  },
+  "Rules": Object {
+    "CheckBootstrapVersion": Object {
+      "Assertions": Array [
+        Object {
+          "Assert": Object {
+            "Fn::Not": Array [
+              Object {
+                "Fn::Contains": Array [
+                  Array [
+                    "1",
+                    "2",
+                    "3",
+                    "4",
+                    "5",
+                  ],
+                  Object {
+                    "Ref": "BootstrapVersion",
+                  },
+                ],
+              },
+            ],
+          },
+          "AssertDescription": "CDK bootstrap stack version 6 required. Please run 'cdk bootstrap' with a recent version of the CDK CLI.",
+        },
+      ],
+    },
+  },
+}
+`;
