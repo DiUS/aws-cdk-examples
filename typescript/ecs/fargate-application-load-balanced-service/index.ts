@@ -16,7 +16,7 @@ class BonjourFargate extends cdk.Stack {
     const fargateService = new ecs_patterns.ApplicationLoadBalancedFargateService(this, "FargateService", {
       cluster,
       taskImageOptions: {
-        image: ecs.ContainerImage.fromRegistry("nginx:1.21"),
+        image: ecs.ContainerImage.fromRegistry("nginx:1.20"),
       },
     });
 
