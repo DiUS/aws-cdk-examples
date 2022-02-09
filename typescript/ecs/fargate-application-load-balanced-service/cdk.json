@@ -1,3 +1,19 @@
 {
-  "app": "node index"
+  "app": "node index",
+  "build": "npm run build",
+  "watch": {
+    "include": [
+      "**"
+    ],
+    "exclude": [
+      "README.md",
+      "cdk*.json",
+      "**/*.js",
+      "tsconfig.json",
+      "package*.json",
+      "yarn.lock",
+      "node_modules",
+      "test"
+    ]
+  }
 }
